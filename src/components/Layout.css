@@ -1,0 +1,59 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  @apply h-screen;
+}
+h1 {
+  @apply text-6xl mb-8 font-bold;
+}
+h2 {
+  @apply text-5xl mb-6 font-semibold;
+}
+h3 {
+  @apply text-3xl mb-3 font-medium  text-gray-800;
+}
+p {
+  @apply mb-4 text-gray-700;
+}
+a {
+  @apply text-gray-900;
+}
+label {
+  @apply mb-2 block font-semibold;
+}
+
+input:not([type="file"]):not([type="hidden"]) {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight; /*focus: outline-none focus: shadow-outline;*/
+}
+.inputGroup {
+  @apply mb-6;
+}
+ol {
+  @apply list-decimal pl-6 my-3 text-gray-700;
+}
+
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-orange {
+  @apply bg-orange-500 text-white;
+}
+.btn-orange:hover {
+  @apply bg-orange-700;
+}
+
+.container {
+  @apply max-w-screen-lg px-4 mx-auto w-full;
+}
+.row {
+  @apply flex flex-wrap;
+}
+.col {
+  @apply flex flex-col flex-grow;
+}

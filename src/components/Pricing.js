@@ -1,30 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 const Pricing = ({ data }) => (
-  <div className="columns">
-    {data.map(price => (
-      <div key={price.plan} className="column">
-        <section className="section">
-          <h4 className="has-text-centered has-text-weight-semibold">
-            {price.plan}
-          </h4>
-          <h2 className="is-size-1 has-text-weight-bold has-text-primary has-text-centered">
-            ${price.price}
-          </h2>
-          <p className="has-text-weight-semibold">{price.description}</p>
-          <ul>
-            {price.items.map(item => (
-              <li key={item} className="is-size-5">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    ))}
-  </div>
-)
+  <section className="mt-5">
+    <div className="flex flex-wrap flex-col content-center md:flex-row">
+      {data.map((price) => (
+        <div className="flex-1" key={price.plan}>
+          <div className="max-w-sm rounded overflow-hidden shadow-lg m-3 p-3">
+            <h4 className="text-center text-xl font-semibold">{price.plan}</h4>
+            <h2 className="text-center text-orange-600">${price.price}</h2>
+            <p className="text-center">{price.description}</p>
+
+            <ul className="list-disc ml-5">
+              {price.items.map((item) => (
+                <li className="py-2" key={item}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
 
 Pricing.propTypes = {
   data: PropTypes.arrayOf(
@@ -35,6 +34,6 @@ Pricing.propTypes = {
       items: PropTypes.array,
     })
   ),
-}
+};
 
-export default Pricing
+export default Pricing;

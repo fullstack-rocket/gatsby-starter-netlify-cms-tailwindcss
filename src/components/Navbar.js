@@ -1,98 +1,77 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+import React from "react";
+import { Link } from "gatsby";
 
-const Navbar = class extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false,
-      navBarActiveClass: '',
-    }
-  }
+import github from "../img/github-icon.svg";
+import logo from "../img/logo.svg";
 
-  toggleHamburger = () => {
-    // toggle the active boolean in the state
-    this.setState(
-      {
-        active: !this.state.active,
-      },
-      // after state has been updated,
-      () => {
-        // set the class in state for the navbar accordingly
-        this.state.active
-          ? this.setState({
-              navBarActiveClass: 'is-active',
-            })
-          : this.setState({
-              navBarActiveClass: '',
-            })
-      }
-    )
-  }
+const items = [
+  { path: "/about", label: "About" },
+  { path: "/products", label: "Products" },
+  { path: "/blog", label: "Blog" },
+  { path: "/contact", label: "Contact" },
+  { path: "/contact/examples", label: "Form Examples" },
+];
+
+export default class extends React.Component {
+  state = { open: false };
+
+  toogleMenu = () => this.setState({ open: !this.state.open });
 
   render() {
+    const { open } = this.state;
     return (
-      <nav
-        className="navbar is-transparent"
-        role="navigation"
-        aria-label="main-navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-            </Link>
-            {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${this.state.navBarActiveClass}`}
-              data-target="navMenu"
-              onClick={() => this.toggleHamburger()}
-            >
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-          <div
-            id="navMenu"
-            className={`navbar-menu ${this.state.navBarActiveClass}`}
+      <nav className="flex items-center justify-between flex-wrap bg-white  px-5 py-3 container">
+        <a href="/" className="mx-3 pr-5">
+          <img src={logo} alt="Kaldi" style={{ width: "88px" }} />
+        </a>
+
+        <div className="block lg:hidden">
+          <button
+            onClick={this.toogleMenu}
+            className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-700 hover:text-gray-900 hover:border-gray-800"
           >
-            <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/about">
-                About
-              </Link>
-              <Link className="navbar-item" to="/products">
-                Products
-              </Link>
-              <Link className="navbar-item" to="/blog">
-                Blog
-              </Link>
-              <Link className="navbar-item" to="/contact">
-                Contact
-              </Link>
-              <Link className="navbar-item" to="/contact/examples">
-                Form Examples
-              </Link>
-            </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/netlify-templates/gatsby-starter-netlify-cms"
-                target="_blank"
-                rel="noopener noreferrer"
+            <svg
+              className="fill-current h-3 w-3"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto  ${
+            open ? "" : "hidden"
+          }`}
+        >
+          <div className="lg:flex-grow text-center lg:text-left">
+            {items.map((item) => (
+              <Link
+                className="block lg:inline-block mr-4 py-2 lg:mt-0  lg:py-0 text-gray-800 text-2xl lg:text-left text-sm  lg:text-lg"
+                to={item.path}
+                key={item.path}
               >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
-            </div>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+          <div>
+            <a
+              className="flex justify-center items-center text-center block mr-4 py-2 lg:mt-0  lg:py-0 text-gray-800 text-2xl lg:text-left text-sm lg:text-lg"
+              href="https://github.com/fullstack-rocket/gatsby-starter-netlify-cms-tailwindcss"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="lg:hidden">Git hub repository</span>
+              <span className="pl-3">
+                <img src={github} alt="Github" style={{ width: "1.5rem" }} />
+              </span>
+            </a>
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
-
-export default Navbar
